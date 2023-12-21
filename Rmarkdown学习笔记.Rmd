@@ -1,0 +1,516 @@
+---
+title: "Rmarkdown自学笔记"
+author: "ZJH"
+date: 2023年3月22日至`r format(Sys.time(), '%Y年%m月%d日')`
+documentclass: ctexart 
+output: 
+  pdf_document: 
+    toc: yes
+    toc_depth: 4
+    latex_engine: xelatex
+  html_document:
+    toc: yes
+    toc_float: true
+    toc_depth: 4  
+    fontsize: 8pt
+    theme: cosmo
+    highlight: monochrome
+  word_document: 
+    toc: yes
+    toc_depth: 4
+theme: simplex
+---  
+
+<font face="黑体" size=8 color=brown><center>  文档沟通篇 </center></font>   
+
+![](D:/Rwd/Rmarkdown/封面.png)  
+
+# 1 Markdown   
+## 1.1 什么是Markdown?  
+&emsp;&emsp;Markdown是一种轻量级标记语言，通过简单的标记语法，它可以使普通文本内容具有一定的格式。[<sup>1</sup>](#refer-anchor)   
+
+## 1.2 Markdown通用语法   
+1.标题  
+Markdown中，在标题文字前书写不同数量的井号可以完成不同级别的标题，一个井号是一级标题，两个是二级标题，三个是三级标题，依次类推。  
+标题行前面应该空一行，否则可能把某些偶然出现在行首的井号误认为标题行的标志。井号和一级标题之间建议保留一个字符的空格。  
+还可以在文本下方添加任意数量的等号来标识一级标题，或破折号来标识二级标题。  
+
+![](D:/Rwd/Rmarkdown/Markdown/标题.png)  
+
+2.列表  
+**无序列表**  
+要创建无序列表，请在每个列表项前面添加破折号、星号或加号。缩进一个或多个列表项可创建嵌套列表。  
+**有序列表**   
+要创建有序列表，请在每个列表项前添加数字并紧跟一个英文句点。数字不必按数学顺序排列，但是列表应当以数字1起始。   
+每个列表项可以输入多行，各行的内容最好左对齐，左对齐在使用文本格式时较易阅读，但不是必须的。两个列表项之间不要空行。  
+
+![](D:/Rwd/Rmarkdown/Markdown/列表.png)
+
+3.段落  
+要创建段落，请使用空白行将一行或多行文本进行分隔。    
+
+![](D:/Rwd/Rmarkdown/Markdown/段落.png)
+
+4.换行      
+在一行的末尾添加两个或多个空格，然后按回车键，即可创建一个换行。  
+5.强调  
+**粗体**  
+要加粗文本，请在单词或短语的前后各添加两个星号（asterisks）或下划线（underscores）。如需加粗一个单词或短语的中间部分用以表示强调的话，请在要加粗部分的两侧各添加两个星号（asterisks）。    
+**斜体**   
+要用斜体显示文本，请在单词或短语前后添加一个星号（asterisk）或下划线（underscore）。  
+要同时用粗体和斜体突出显示文本，请在单词或短语的前后各添加三个星号或下划线。要加粗并用斜体显示单词或短语的中间部分，请在要突出显示的部分前后各添加三个星号，中间不要带空格。  
+
+![](D:/Rwd/Rmarkdown/Markdown/强调.png)
+
+6.引用      
+要创建块引用，请在段落前添加一个大于号。      
+块引用可以包含多个段落。为段落之间的空白行添加一个大于号。      
+块引用可以嵌套。在要嵌套的段落前添加一个大于号。    
+
+![](D:/Rwd/Rmarkdown/Markdown/引用.png)
+
+7.分割线    
+要创建分隔线，请在单独一行上使用三个或多个星号、破折号或下划线，并且不能包含其他内容。    
+
+![](D:/Rwd/Rmarkdown/Markdown/分割线.png)
+
+8.代码  
+**行内代码**    
+要将单词或短语表示为代码，请将其包裹在反引号中。    
+**代码块**      
+用三个连续的反向单撇号表示代码开头与代码结束，中间就会当作源程序代码处理。     
+
+![](D:/Rwd/Rmarkdown/Markdown/代码.png)
+
+9.数学公式  
+行内公式:前后各用一个\$符号包裹公式。  
+行间公式:前后各用两个\$符号包裹公式。     
+
+![](D:/Rwd/Rmarkdown/Markdown/公式.png)
+10.表格  
+要添加表，请使用三个或多个连字符创建每列的标题，并使用管道分隔每列。您可以选择在表的任一端添加管道。     
+
+![](D:/Rwd/Rmarkdown/Markdown/表格.png)
+
+11.图片插入和链接  
+图片：
+要添加图像，请使用感叹号，然后在方括号增加替代文本，图片链接放在圆括号里，括号里的链接后可以增加一个可选的图片标题文本。
+
+插入图片Markdown语法代码：`![图片描述](图片链接)`。  
+
+链接：
+链接文本放在中括号内，链接地址放在后面的括号中，链接title可选。  
+
+超链接Markdown语法代码：`[超链接显示名](超链接地址)`。  
+
+![](D:/Rwd/Rmarkdown/Markdown/图片.png)
+
+12.脚注    
+要创建脚注参考，请在方括号内添加插入符号和标识符。标识符可以是数字或单词，但不能包含空格或制表符。标识符仅将脚注参考与脚注本身相关联在输出中，脚注按顺序编号。    
+
+![](D:/Rwd/Rmarkdown/Markdown/脚注.png)
+
+# 2 Rmarkdown    
+## 2.1 什么是Rmarkdown?    
+Rmarkdown是由谢益辉开发的在R语言环境中的markdown编辑工具，用rmarkdown撰写文章，既可以像⼀般的markdown编辑器一样编辑文本，也可以在rmarkdown中插入代码块，并将代码运行结果输出。    
+Rmarkdown格式文件以.Rmd为扩展名，rmarkdown扩展包和knitr包一起为生成Rmd格式提供支持。   
+Rmarkdown可实现文学化编程，即文档书写+编程，Rmarkdown将代码插入文档，在写研究报告或者论文时，这种方式集分析、思考、论述等过程于一体，形成的报告格式严谨，易复现，易共享。    
+
+Rmarkdown主要功能：   
+
+- 撰写数据分析报告  
+- 用交互笔记本记录学习过程  
+- 发表电子书和长篇文档  
+- 设计数据驱动的个人简历  
+- 建立个人网站和博客  
+- 创作演示文档和交互报表   
+- 用动态文档自动化报告发布  
+
+## 2.2 创建Rmarkdown文档  
+首先当然要保证安装R和Rstudio。  
+其次在Rstudio中安装rmarkdown包。安装命令为install.packages('rmarkdown')。  
+新建文档：在Rstudio中，依次点File--New File--R Markdown...  
+
+![](D:/Rwd/Rmarkdown/新建文档.png)  
+  
+作者可对title(标题)、author(作者)、dates(写作日期)进行自定义，可在Default Output Format选项自定义报告输出的格式。点击ok，新文档创建成功，文档以.Rmd为后缀。  
+
+![](D:/Rwd/Rmarkdown/默认模板.png)
+  
+Rmarkdown提供了一个简单的示例文档，示例文档包括3部分：1.YAML、2.markdown⽂本、3.代码块。我们可以在示例文档的基础上进行修改以满足自己对输出文档的需求。[<sup>2</sup>](#refer-anchor)    
+
+1、YAML  
+1到6行由一对三个减号包裹的部分为YAML，这部分通过若干“键:值”，对rmarkdown文档的性质进行定义，包括title、author、date、输出文档类型、文档主题、是否添加目录等。定义方式为冒号前指定键名， 冒号后指定对应的值，如：`title: Rmarkdown学习笔记`，表示定义文档题目为“Rmarkdown学习笔记”。    
+**常见键值设置**   
+`date: "r Sys.Date()"`：可以设置日期返回为今天。        
+如：`date: "2022年1月1日至r format(Sys.time(),'%Y年%m月%d日')`，表示从之前某一时间点到今日。   
+除过标题、作者、日期外，最重要的是指定输出格式，设定方法为：  
+output:html_document、pdf_document、word_document，分别表示输出html、或者pdf、或者word文档。    
+可以在output下设置二级选项，常见设置包括目录、主题等。    
+
+*其他二级选项*：  
+
+- toc: true：显示目录  
+- toc_float: true：浮动目录  
+- number_sections: true：添加标题编号  
+- code_folding: hide：代码折叠  
+- fig_width: 7, fig_height: 6：固定图片宽高  
+- fig_caption: true：添加图片标题  
+- df_print: kable：数据框输出表格样式  
+- highlight: tango：设置语法高亮  
+- theme: united：设置主题  
+- keep_md: true：保存中间.md文档  
+- citation_package: natbib：Latex 参考文献格式用natbib宏包  
+- reference_docx: "template.docx"：自定义word模板  
+
+2、markdown文本    
+这部分是报告或论文的主体。文本大部分语法都遵循Markdown语法，少部分语法是Rmarkdown专用语法。  
+
+3、代码块      
+位于一对反引号之间的部分即为代码块(chunk)，包含了报告可执行的代码。大括号后面的r指定了代码块语言类型，r代表是R语言，也可以替换为python等语言类型；语言名称的后面还可以附上代码块选项。代码块选项与代码块的关系就如同YAML元数据之于整个文档一样，用于指定该代码块的运行和输出设置。在自带文档中，setup是代码块的标签，`include = FALSE`指定了这个代码块的内容不会显示在输出中。    
+创建代码块快捷键：Ctrl + Alt + I。    
+
+*常见代码块设置参数*：  
+
+- eval = FALSE：只显示代码，不运行代码  
+- echo = FALSE：不显示代码，只显示运行结果  
+- include = FALSE：运行代码，不显示代码和运行结果  
+- tidy = TRUE：整洁代码格式  
+- message = FALSE：不输出提示信息，比如包的载入信息  
+- warning = FALSE：不输出警告  
+- error = TRUE：忽略错误，继续编译文档  
+- collapse = TRUE：代码块结果放在一个文本块  
+- cache = TRUE：缓存运行结果，能加速后续再编译  
+
+## 2.3 输出文档   
+新建的Rmarkdown文档系统命名为untitled.Rmd(当你点击Rstudio左上角的保存按钮时可以自定义文档名称，并指定保存路径进行保存)，.Rmd文件是Rmarkdown的源文档，点击Rstudio右上角的Knit按钮或调用rmarkdown::render()函数后可进行文档编译并输出，Knit按钮本质上就是对rmarkdown包中render()函数的封装。点击Knit按钮后会跳出编译好的文档untitled.html，即为输出结果，HTML是Rmarkdown文档的默认输出格式，要输出其他格式，可在Rmarkdown文档YAML中进行设置。[<sup>4</sup>](#refer-anchor)  
+
+要想使用Rmarkdown输出PDF格式的文档，必须事先安装LaTeX。LaTeX有很多发行版，如MiKTex，MacTeX，TeX Live等，建议Rmarkdown的用户使用TinyTeX。TinyTex是谢益辉专为Rmarkdown开发的超轻量级的Latex环境。    
+
+安装TinyTeX命令：  
+`install.packages("tinytex")`    
+`tinytex::install_tinytex()`    
+
+我在自带模板的基础上进行了粗略修改，输出结果为：  
+![](D:/Rwd/Rmarkdown/输出例子.png)
+
+## 2.4 文档要素  
+### 2.4.1 文本    
+大部分遵从Markdown语法规则。下面以输出html为例，对文本部分进行梳理。    
+
+**1、题目**      
+在YAML中定义，如`title:"论学习Rmarkdown的重要性"`。  
+
+**2、作者和单位**   
+在YAML中定义，`author: "这是文档作者"`。  
+若有多个作者，可用[]将多个作者包裹，作者间用逗号分隔。示例`author: ["author1","author2"]`，但是这样渲染后的结果每个作者占一行；也可以用短横线分隔多个作者。形式为`- name: 作者`    
+作者单位：`affiliation: "这是文档作者的单位"`。   
+![](D:/Rwd/Rmarkdown/文本示例/单个作者.png)  
+![](D:/Rwd/Rmarkdown/文本示例/多作者.png)  
+按照科技论文的格式进行编排试一下。  
+![](D:/Rwd/Rmarkdown/文本示例/论文格式.png)
+
+**3、目录**     
+在YAML中定义，常见参数如下：  
+
+- toc: true 是所有输出格式的通用选项，用以自动生成目录。  
+- toc_depth: 4 通用选项，控制目录显示深度，即输出文档要显示的目录层级。  
+- toc_float(默认FALSE): true 适用于输出HTML格式文档。属性为true时，目录变为侧边栏，并固定在屏幕左侧。    
+- collapsed(默认true)：是否折叠二级标题以下的标题。  
+- smooth_scroll(默认true)：是否在鼠标点击目录时添加平滑滚动。  
+- number_sections(默认FALSE)：若为true，自动添加目录序号。   
+![](D:/Rwd/Rmarkdown/文本示例/目录.png)
+
+**4、更改全文格式**  
+在YAML中定义：    
+字号：fontsize: 字号，如8pt      
+页边距：geometry: "left=2cm,right=2cm,top=2cm,bottom=2cm"   
+主题：theme: 主题名称
+
+**5、分页**    
+分页：斜杠后面加newpage，`\newpage`。   
+![](D:/Rwd/Rmarkdown/文本示例/分页.png)
+
+**6、分割线**      
+如果只想插入一条水平的分割线而不分页，可以插入三个减号\---或者星号\***。   
+下面有一条分割线。  
+
+***   
+
+---  
+![](D:/Rwd/Rmarkdown/文本示例/分割线.png)
+
+**7、换行和空行**  
+换行：文字+至少2个空格+回车键   
+示例：  
+这是换行前的一行。  
+
+这是换行后的下一行。   
+
+空行：段落之间添加空行需要通过`</br>`完成。[<sup>5</sup>](#refer-anchor)   
+示例：  
+这是空行前的一行。  
+</br>  
+这是空行后的一行。  
+![](D:/Rwd/Rmarkdown/文本示例/换行.png)
+
+**8、字体渲染**  
+<font face="楷体" color=green size=5>改变字体及颜色示例</font>  
+
+以上设置的代码为`<font face="楷体" color=green size=5>改变字体及颜色示例</font>`，face定义字体，color定义字体颜色，size定义字体大小。  
+</br>  
+
+<span style="color:blue" face="黑体" size=18>改变字体及颜色的另一种方式</span>  
+
+以上代码为`<span style="color:blue" face="黑体" size=18>改变字体及颜色的另一种方式</span> `    
+![](D:/Rwd/Rmarkdown/文本示例/字体渲染.png)
+
+**9、公式**     
+行内公式：公式前后各一个\$符号。    
+行间公式：公式前后各两个\$$符号。  
+公式内上标：`^2`   
+公式内下标：`_2`     
+分数：`\frac{分子}{分母}`，或`分子 \over 分母`  
+加减乘除：`+`，`-`，`\times`，`\div`。  
+一个示例：
+$$y=\frac {a}{b}+cx^2-(d\times e) \div f_2$$  
+![](D:/Rwd/Rmarkdown/文本示例/公式.png)
+
+**10、上下标及删除线**        
+上标：前后各一个`^`。`^上标^`  
+下标：前后各一个`~`。`~下标~`  
+删除线：前后各两个`~`。`~~删除线~~`  
+一个示例：这是^上标^示例，这是~下标~示例，这是~~删除线~~示例。   
+![](D:/Rwd/Rmarkdown/文本示例/上下标.png)
+
+**11、首行缩进**    
+方式1：  
+缩进几个空格就添加几个`&emsp;`。  
+
+这是未缩进的文本；  
+&emsp;&emsp;&emsp;这是首行缩进3个空格的示例文本。    
+![](D:/Rwd/Rmarkdown/文本示例/首行缩进.png)
+
+方式2：  
+段落前加\|，后面空格进行缩进。   
+
+| this is a example  
+|   this is another example  
+|     this is the third example    
+![](D:/Rwd/Rmarkdown/文本示例/首行缩进1.png)
+
+
+### 2.4.2 代码  
+R Markdown中，R代码有两种使用方式：行内代码和代码块。  
+
+**行内代码(inline code)**：位于一对反引号内部，以r开头，空一格，后面是R的表达式。行内代码可实现在Markdown文本书写的同时嵌入代码并运行结果。    
+
+![](D:/Rwd/Rmarkdown/文本示例/行内代码.png)  
+
+**R代码块(chunk)**：以三个反引号加{r}开始，再以三个反引号结束，作者可以在源文档中插入任意个代码块，代码块单独成段，文档渲染后代码运行结果显示在代码块后。代码块选项(chunk options)用来控制单个代码块的运行细节。   
+
+代码块选项设置：{r 代码名称，代码块选项}  
+
+给代码块命名的好处是：可在导航栏按名字浏览代码块，让代码生成的图形有意义地命名，避免在缓存中重复计算。[<sup>4</sup>](#refer-anchor)      
+
+**常见代码块选项及参数**：   
+
+- eval=FALSE：默认TRUE，当FALSE，只显示代码，不运行代码。   
+![](D:/Rwd/Rmarkdown/文本示例/eval.png)
+
+- echo=FALSE：默认TRUE，当FALSE，不显示代码，只显示运行结果。  
+![](D:/Rwd/Rmarkdown/文本示例/echo.png)
+
+- include=FALSE：运行代码，不显示代码和运行结果，include = FALSE等价于echo = FALSE和results = 'hide'。   
+![](D:/Rwd/Rmarkdown/文本示例/include.png)
+
+- collapse=TRUE：代码块结果放在一个文本块。  
+![](D:/Rwd/Rmarkdown/文本示例/collapse.png)
+
+- results="hide"：隐藏输出结果；选项results=选择文本型结果的类型。  
+makeup：默认选项，会把文本型结果变成HTML的原样文本格式；    
+![](D:/Rwd/Rmarkdown/文本示例/results-makeup.png)  
+
+hide：隐藏代码块的运行结果。results='hide'加上echo=FALSE等价于include = FALSE。  
+![](D:/Rwd/Rmarkdown/文本示例/results-hide.png)    
+hold：一个代码块所有代码都显示完，才显示所有结果；  
+![](D:/Rwd/Rmarkdown/文本示例/results-hold.png)  
+
+asis：文本型输出直接进入到HTML文件中，这需要R代码直接生成HTML标签，knitr包的kable()函数可以把数据框转换为HTML代码的表格。 
+![](D:/Rwd/Rmarkdown/文本示例/results-asis.png)
+- prompt=TRUE代码用R的大于号提示符开始。如果希望结果不用#号保护，使用选项`comment=' '`。  
+![](D:/Rwd/Rmarkdown/文本示例/prompt-true.png)
+
+**其他设置：**  
+- tidy=TRUE：整洁代码格式。  
+- message=FALSE：不输出提示信息，比如包的载入信息。    
+- warning=FALSE：不输出警告。    
+- error=TRUE：忽略错误，继续编译文档。    
+- cache=TRUE：缓存运行结果，能加速后续再编译。    
+如果代码块涉及复杂的计算，cache=TRUE可以让knitr把运行结果保存为.rds文件，并在下次编译时略过计算过程，直接读取.rds 节省时间。只有代码块的内容发生变化时，knitr才会重新计算并更新.rds文件。有时knitr的缓存机制会让人难以预测代码是否重新运行，只推荐必要时使用。    
+- fig.width, fig.height, fig.align, fig.cap：设置输出图形的宽和高（英寸）、对齐、标题。   
+- out.width, out.height：设置输出图形的宽和高（百分比）。    
+
+**全局设置**  
+若markdown内的代码块存在⼀样的参数设置，则可以提前设计好全局的代码块参数。全局代码块通过`knitr::opts_chunk$set`函数进行设置，⼀般设置在YAML文件下方。
+
+`knitr::opts_chunk$set(代码块选项)`  
+
+![](D:/Rwd/Rmarkdown/文本示例/全局设置.png)
+
+### 2.4.3 图片    
+
+1、R代码生成的图片  
+
+默认情况下，代码块生成的图片在输出文档中被直接插入该代码块的下方。  
+
+**常见图片代码块选项**  
+
+- fig.cap：设置图片标题，如fig.cap = "这是图片标题"。  
+
+- fig.subcap：设置图片副标题。  
+
+- fig.width和fig.height：调整代码块生成图形时图形设备(graphical device)的大小。   
+kntir首先通过图形设备将图片存储为文件(例如png，jpg)，随后在输出文档中引用这些文件。默认情况下fig.width = 7，fig.height = 5。  
+
+- out.width和out.height，通常取值为百分比，表示图片占据一页的比例。例如out.height='80%'表示图片占据容器高度的80%。  
+
+- fig.align：图片的对齐方式。    
+  - "left"：靠左对齐  
+  - "center"：居中对齐   
+  - "right"：靠右对齐     
+
+- fig.show：设置图片输出方式。  
+  -  fig.show = 'asis'：图在代码后面，默认值。    
+  -  fig.show = 'hold'：代码块中所有代码产生的图片都放置在这个完整代码块的后面(当一个代码块生成多个图片时，Rmarkdown会把它拆分成多个代码块，每个代码块生成一个图片)    
+  -  fig.show = 'animate'：代码块中产生的所有图片合成一个动画图片。  
+  -  fig.show = 'hide'：产生所有图片，但不展示。   
+  
+![](D:/Rwd/Rmarkdown/文本示例/图片.png)
+
+![](D:/Rwd/Rmarkdown/文本示例/图片1.png)  
+
+
+```{r fig.show='hold',out.width = "50%", fig.cap = "Fig1 同数据不同图展示", fig.align="center"}
+plot(1:10)
+barplot(1:10)
+```
+
+
+2、外部图片插入  
+
+对于非代码生成的外部图片，可以使用Markdown的图片语法`![图片描述](图片路径)`或knitr 包中的函数`knitr::include_graphics()`插入图片。  
+
+
+### 2.4.4 表格    
+
+
+方式1：Markdown 语法编写表格。   
+
+|title|column1|column2|
+|:----:|:----|----:|
+|row1|1|2|
+|row2|3|4|  
+
+方式2：使用knitr包中的`kable()`函数，它接受一个数据框，返回对应的表格。  
+
+```{r iris-table}
+library(tidyverse) # 调用tidyverse包。
+dt <- iris %>% group_by(Species) %>% summarise(Sepal.Width.mean=mean(Sepal.Width), Sepal.Length.mean=mean(Sepal.Length)) # 对iris数据集分组统计后构建新数据集dt。
+dt %>% knitr::kable() # 对内置数据集iris进行分组统计后用knit包kable函数输出为表格。
+```
+
+sjPlot包绘制三线表  
+
+```{r}
+library(sjPlot) # 调用sjPlot。
+tab_df(dt) # 绘制三线表。
+```
+
+
+### 2.4.5 参考文献   
+
+**1、手动添加**  
+添加语法：`[<sup>参考文献的序号</sup>](#refer-anchor)`  
+在正文添加以上语法，在文末尾写好参考文献标题，在标题下按序号添加相应的参考文献内容或者链接。  
+如：`[参考文献的序号] 数据可视化工具目录，<https://datavizcatalogue.com/ZH/>`  
+*个人认为手动添加适用于笔记类文章书写时添加参考文献。*    
+
+![](D:/Rwd/Rmarkdown/文本示例/手动参考文献.png)
+
+下面学习一下如何利用zotero和Rmarkdown为科技论文添加参考文献。输出格式为pdf。  
+
+**2、借助zotero添加参考文献**  
+学习了一下，需要以下3个步骤来完成。[<sup>9,10</sup>](#refer-anchor)  
+<font size=4 color= blue>*step1：zotero中安装插件Better BibTex* </font>   
+安装此插件的目的是导出文献库，导出步骤：在zotero中选中要导出的文献库或者文献分类，鼠标右键选择导出文献库，这时会跳出导出设置界面，可选择keep updated，这样做的好处是后期文献库若有更新，导出的库也会更新，点击ok，跳出保存路径选择框，给导出的文件命名并选择保存路径后，就会导出.bib格式的文献库。注意：要想引用此文献库的参考文献，需将此文献库(.bib)与正在编辑的Rmarkdown文件(.rmd)保存在同一路径。   
+<font size=4 color= blue>*step2：Rstudio中安装rbbt包*</font>   
+在Rstudio中运行如下命令：  
+`remotes::install_github("paleolimbot/rbbt")`  
+
+这样在Rstudio中就安装了zotero和Rmarkdown的联动插件。在RStudio的Addins中可以看到RBBT相关的按钮。点击Insert Zotero Citation按钮，会弹出Zotero文献的选择弹窗，选取要引用的文献后，文献自动插入Rmarkdown中。  
+<font size=4 color= blue>*step3：Rmarkdown中设置*</font>  
+在Rmarkdown头部进行如下设置：  
+
+`bibliography: myreference.bib`  
+
+bibliography用于设置引用的文献库，这里myreference.bib是从zotero中导出的自命名文献库。  
+
+`csl: field-crops-research.csl`  
+
+csl用于设置文献引用样式，这里field-crops-research.csl是在<https://www.zotero.org/styles>网站搜索Field Crops Research期刊样式后下载的文献样式文档。要想引用此样式，需将此文档(.csl)保存在与Rmarkdown(.rmd)文档同一目录内。    
+
+完成以上步骤后，Knit导出pdf文档即可。以下是自己演示的一个范例。  
+
+![](D:/Rwd/Rmarkdown/文本示例/参考文献.png) 
+
+# 3 用bookdown制作图书
+
+bookdown包是由谢益辉开发的包，此包可将多个Rmarkdown文档组成长篇文档。   
+
+安装包：  
+install.packages('bookdown')  
+
+创建bookdown：  
+File -> New Project -> New Directory -> Book Project using bookdown
+
+写中文书稿  
+
+
+
+
+
+
+
+
+### 参考文献   
+
+[1] Markdown 基本语法,<https://markdown.com.cn/basic-syntax/>  
+[2] RMarkdown入门教程,庄亮亮,<https://cosx.org/2021/04/rmarkdown-introduction>  
+[3] Rmarkdown中文指南,<https://cosname.github.io/rmarkdown-guide/rmarkdown-base.html#install-rmarkdown>  
+[4] R语言编程：基于tidyverse，张敬信  
+[5] Rmarkdown学习-文本部分,<https://zhuanlan.zhihu.com/p/586111689#tocbar-1bvsj0k>  
+[6] An R Markdown Template for Academic Manuscripts, <http://svmiller.com/blog/2016/02/svm-r-markdown-manuscript/>    
+[7] RMarkdown Template that Manages Academic Affiliations – docx or PDF output, <https://labrtorian.com/2019/08/26/rmarkdown-template-that-manages-academic-affiliations/>   
+[8] R语言教程, <https://www.math.pku.edu.cn/teachers/lidf/docs/Rbook/html/_Rbook/rmarkdown.html#rmarkdown-rticles>   
+[9] 使用Zotero为Rmarkdown插入参考文献,<https://zhuanlan.zhihu.com/p/410410291>  
+[10]最详细教程：Zotero和Better BibTeX安装，以及如何在Rmarkdown中引用文献,<https://blog.csdn.net/Linyue_2021/article/details/124992455>  
+[11]    
+[12]  
+[13]  
+[14]  
+[15]  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
